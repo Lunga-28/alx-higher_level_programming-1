@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 
 for i in range(99):
+    print("{}, ".format(i), end="")
 
-    print("{}".format(i), end=", ")
-    
+print("99")
 
-else:
-
-    print("{}".format(i + 1))
