@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
-for i in range(10):
-    for j in range(i + 1, 10):
-        print("{:02}, ".format(i * 10 + j), end="")
+def islower(c):
+    ascii_val = ord(c)
+    return 97 <= ascii_val <= 122
 
-print("{:02}".format(99))
