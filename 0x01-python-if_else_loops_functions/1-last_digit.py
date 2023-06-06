@@ -4,7 +4,7 @@ import random
 
 number = random.randint(-10000, 10000)
 
-last_d = abs(number) % 10
+last_d = number % 10
 
 print("Last digit of", number, "is", last_d, end=" ")
 
