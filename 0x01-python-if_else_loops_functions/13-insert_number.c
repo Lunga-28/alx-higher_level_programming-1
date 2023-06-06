@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "lists.h"
 
 /**
  * create_node - Creates a new node with the given number
