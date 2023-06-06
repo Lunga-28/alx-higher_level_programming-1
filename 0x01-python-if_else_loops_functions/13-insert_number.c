@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -6,50 +7,33 @@
  *
  * Return: The address of the new node, or NULL if memory allocation failed
  */
-listint_t *create_node(int number)
-{
+
+
+/* Definition of a singly linked list node */
+typedef struct listint_s {
+    int data;
+    struct listint_s *next;
+} listint_t;
+
+listint_t *insert_node(listint_t **head, int number) {
     listint_t *new_node = malloc(sizeof(listint_t));
-
-    if (new_node)
-    {
-        new_node->n = number;
-        new_node->next = NULL;
+    if (new_node == NULL) {
+        return NULL;  // Memory allocation failed
     }
+    new_node->data = number;
 
-    return new_node;
-}
-
-/**
- * insert_node - Inserts a number into a sorted singly linked list
- * @head: A pointer to the pointer to the head of the linked list
- * @number: The number to be inserted
- *
- * Return: The address of the new node, or NULL if memory allocation failed
- */
-listint_t *insert_node(listint_t **head, int number)
-{
-    listint_t *new_node = create_node(number);
-    listint_t *current = *head, *prev = NULL;
-
-    if (!new_node)
-        return NULL;
-
-    while (current && current->n < number)
-    {
-        prev = current;
-        current = current->next;
-    }
-
-    if (!prev)
-    {
+    if (*head == NULL || number < (*head)->data) {
         new_node->next = *head;
         *head = new_node;
-    }
-    else
-    {
-        prev->next = new_node;
-        new_node->next = current;
+    } else {
+        listint_t *current = *head;
+        while (current->next != NULL && current->next->data < number) {
+            current = current->next;
+        }
+        new_node->next = current->next;
+        current->next = new_node;
     }
 
     return new_node;
 }
+
