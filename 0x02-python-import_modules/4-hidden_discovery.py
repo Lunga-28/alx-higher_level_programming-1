@@ -1,11 +1,19 @@
 #!/usr/bin/python3
 
-import hidden_4
+import dis
 
 if __name__ == "__main__":
+    with open("hidden_4.pyc", "rb") as file:
+        code = file.read()
 
-    for name in dir(hidden_4):
+    bytecode = dis.Bytecode(code)
 
-        if "__" not in name:
+    names = set()
+    for instr in bytecode:
+        if instr.opname == "LOAD_CONST":
+            const = instr.argval
+            if isinstance(const, str) and not const.startswith("__"):
+                names.add(const)
 
-            print(name)
+    for name in sorted(names):
+        print(name)
