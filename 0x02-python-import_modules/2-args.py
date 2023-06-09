@@ -3,7 +3,6 @@
 import sys
 
 if __name__ == "__main__":
-
     n = len(sys.argv)
 
     if n == 1:
