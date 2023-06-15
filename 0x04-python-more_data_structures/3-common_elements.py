@@ -2,8 +2,9 @@
 def common_elements(set_1, set_2):
     common_set = set()
 
-    # Iterate over each element in the first set
+
     for elem in set_1:
+        
         if elem in set_2:
 
             common_set.add(elem)
