@@ -4,11 +4,17 @@ import math
 class MagicClass:
     def __init__(self, radius=0):
         self.__radius = 0
+        self.radius = radius
 
-        if type(radius) is not int and type(radius) is not float:
-            raise TypeError('radius must be a number')
+    @property
+    def radius(self):
+        return self.__radius
 
-        self.__radius = radius
+    @radius.setter
+    def radius(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError("radius must be a number")
+        self.__radius = value
 
     def area(self):
         return self.__radius ** 2 * math.pi
