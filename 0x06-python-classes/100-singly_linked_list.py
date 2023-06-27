@@ -1,53 +1,55 @@
 #!/usr/bin/python3
 
-"""Define a class Square."""
-
-
-class Square:
-    """Represent a square."""
-
-    def __init__(self, size=0):
-        """Initialize a new Square.
-
-        Args:
-            size (int): The size of the new square. Defaults to 0.
-        """
-        self.__size = size
+class Node:
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next_node = next_node
 
     @property
-    def size(self):
-        """Retrieve the size of the square."""
-        return self.__size
+    def data(self):
+        return self.__data
 
-    @size.setter
-    def size(self, value):
-        """Set the size of the square.
-
-        Args:
-            value (int): The new size of the square.
-
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is less than 0.
-        """
+    @data.setter
+    def data(self, value):
         if not isinstance(value, int):
-            raise TypeError("size must be an integer")
-        elif value < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = value
+            raise TypeError("data must be an integer")
+        self.__data = value
 
-    def area(self):
-        """Calculate the area of the square.
+    @property
+    def next_node(self):
+        return self.__next_node
 
-        Returns:
-            int: The area of the square.
-        """
-        return self.__size ** 2
+    @next_node.setter
+    def next_node(self, value):
+        if value is not None and not isinstance(value, Node):
+            raise TypeError("next_node must be a Node object")
+        self.__next_node = value
 
-    def my_print(self):
-        """Print the square using '#' character."""
-        if self.__size == 0:
-            print()
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def sorted_insert(self, value):
+        new_node = Node(value)
+
+        if self.head is None:
+            self.head = new_node
+        elif value <= self.head.data:
+            new_node.next_node = self.head
+            self.head = new_node
         else:
-            for _ in range(self.__size):
-                print("#" * self.__size)
+            current = self.head
+            while current.next_node is not None and current.next_node.data < value:
+                current = current.next_node
+            new_node.next_node = current.next_node
+            current.next_node = new_node
+
+    def __str__(self):
+        result = ""
+        current = self.head
+        while current is not None:
+            result += str(current.data) + "\n"
+            current = current.next_node
+        return result.rstrip()
+
