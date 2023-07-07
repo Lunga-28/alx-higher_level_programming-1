@@ -1,4 +1,16 @@
 #!/usr/bin/python3
+
+
+"""
+
+This module adds two integers and returns sum of two numbers a & b.
+
+Only accepts integers and floats else TypeError is raised
+
+This module will convert float to integer
+
+"""
+
 def add_integer(a, b=98):
     """
     Adds two integers
