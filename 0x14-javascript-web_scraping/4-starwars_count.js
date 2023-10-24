@@ -1,23 +1,23 @@
 #!/usr/bin/node
 // prints number of movies where "Wedge Antilles" is present
-let request = require('request');
-let searchEle = 'https://swapi.co/api/people/18/';
-let count = 0;
-let options = {
-  url: process.argv[2],
-  headers: {
-    'format': 'json'
-  }
-};
-function callback (error, response, body) {
-  if (error) { console.log(error); } else {
-    let res = (JSON.parse(body));
-    for (let item in res['results']) {
-      if (res['results'][item]['characters'].indexOf(searchEle) !== -1) {
-        count++;
+const request = require('request');
+const url = process.argv[2];
+
+request(url, function (error, response, body) {
+  if (error) {
+    console.log('error:', error);
+  } else {
+    const results = JSON.parse(body).results;
+    let count = 0;
+
+    for (let i = 0; i < results.length; i++) {
+      const chars = results[i].characters;
+      for (let j = 0; j < chars.length; j++) {
+        if (chars[j].endsWith('18/')) {
+          count += 1;
+        }
       }
     }
+    console.log(count);
   }
-  console.log(count);
-}
-request(options, callback);
+});
